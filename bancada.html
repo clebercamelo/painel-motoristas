@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Atendente - Bancada Dupla (Operação Laranja)</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at center, #241202 0%, #0f0701 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            color: #f3f4f6;
+        }
+
+        .container {
+            background: rgba(30, 20, 15, 0.85);
+            border: 1px solid rgba(255, 123, 8, 0.25);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 123, 8, 0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 580px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        h1 {
+            color: #ff7b08;
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-shadow: 0 0 15px rgba(255, 123, 8, 0.3);
+            text-transform: uppercase;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            color: #d1d5db;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid rgba(255, 123, 8, 0.2);
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 500;
+            background-color: rgba(15, 10, 5, 0.6);
+            color: #ffffff;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        input[type="text"]:focus {
+            border-color: #ff7b08;
+            background-color: rgba(15, 10, 5, 0.9);
+            box-shadow: 0 0 15px rgba(255, 123, 8, 0.25);
+        }
+
+        input[type="text"].erro-campo {
+            border-color: #ef4444 !important;
+            background-color: rgba(239, 68, 68, 0.1) !important;
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.3) !important;
+        }
+
+        .status-box {
+            background-color: rgba(255, 123, 8, 0.05);
+            border: 1px solid rgba(255, 123, 8, 0.15);
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 18px;
+            font-size: 14px;
+            color: #ff9d42;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .status-box span {
+            font-weight: 800;
+            font-size: 20px;
+            color: #ffffff;
+            background: #ff7b08;
+            padding: 1px 10px;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(255, 123, 8, 0.4);
+        }
+
+        .proximo-preview {
+            background-color: rgba(255, 255, 255, 0.02);
+            border: 1px dashed rgba(255, 255, 255, 0.12);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: left;
+            font-size: 14px;
+            color: #e5e7eb;
+            line-height: 1.5;
+        }
+
+        .proximo-preview h4 {
+            color: #ff7b08;
+            text-transform: uppercase;
+            font-size: 11px;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.12);
+            padding-bottom: 4px;
+        }
+
+        .txt-presente {
+            color: #4ade80 !important;
+            font-weight: 700;
+        }
+
+        .txt-ausente {
+            color: #f87171 !important;
+            font-weight: 700;
+        }
+
+        .btn-call {
+            width: 100%;
+            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 10px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+        }
+
+        .btn-call:hover:not(:disabled) {
+            background: linear-gradient(135deg, #1dbb58 0%, #16a34a 100%);
+            box-shadow: 0 6px 16px rgba(22, 163, 74, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .btn-call:active:not(:disabled) {
+            transform: translateY(1px);
+        }
+
+        .btn-call:disabled {
+            background: #374151;
+            color: #9ca3af;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .atual-chamado {
+            margin-top: 22px;
+            padding: 16px;
+            background: linear-gradient(145deg, rgba(255, 123, 8, 0.06) 0%, rgba(255, 123, 8, 0.01) 100%);
+            border: 1px solid rgba(255, 123, 8, 0.2);
+            border-radius: 12px;
+            display: none;
+            text-align: left;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .atual-chamado h3 {
+            color: #ff9d42;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 123, 8, 0.15);
+            padding-bottom: 4px;
+            text-align: center;
+        }
+
+        .dupla-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 5px;
+        }
+
+        .dupla-box {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 12px 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .driver-name {
+            font-size: 16px;
+            line-height: 1.2;
+            margin-bottom: 8px;
+            min-height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cage-badge {
+            display: inline-block;
+            background: rgba(255, 123, 8, 0.12);
+            border: 1px solid rgba(255, 123, 8, 0.25);
+            color: #ff9d42;
+            padding: 3px 10px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .dica-teclado {
+            margin-top: 14px;
+            font-size: 12px;
+            color: #6b7280;
+        }
+        
+        .dica-teclado strong {
+            color: #ff7b08;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Painel da Bancada</h1>
+
+        <div class="form-group">
+            <label for="bancadaInput">Identifique sua Bancada:</label>
+            <!-- Placeholder fixado esteticamente como solicitado -->
+            <input type="text" id="bancadaInput" placeholder="Ex: Bancada 01" autofocus required>
+        </div>
+
+        <div class="status-box">
+            Motoristas aguardando: <span id="contadorFila">0</span>
+        </div>
+
+        <div class="proximo-preview">
+            <h4>Próxima Chamada (Status de Presença):</h4>
+            <div id="dadosProximo">Ninguém na fila</div>
+        </div>
+
+        <button id="btnChamar" class="btn-call">Chamar Próximo</button>
+        <p class="dica-teclado">Pressione <strong>ENTER</strong> para Chamar a Dupla</p>
+
+        <div id="painelAtual" class="atual-chamado">
+            <h3>Última Chamada Realizada:</h3>
+            <div class="dupla-container">
+                <div class="dupla-box">
+                    <div class="driver-name"><span id="nomeAtualImpar" class="txt-presente">-</span></div>
+                    <div class="cage-badge"><span id="gaiolaAtualImpar">-</span></div>
+                </div>
+                <div class="dupla-box">
+                    <div class="driver-name"><span id="nomeAtualPar" class="txt-presente">-</span></div>
+                    <div class="cage-badge"><span id="gaiolaAtualPar">-</span></div>
+                </div>
+            </div>
+            <p style="margin-top: 12px; font-size: 12px; color: #9ca3af; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 8px;">
+                Horário da Chamada: <strong style="color: #ff7b08;"><span id="horaAtual">-</span></strong>
+            </p>
+        </div>
+    </div>
+
+    <!-- SDK do Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCndSz1N8C_i94VbQsVLu9VUIEI1du-KAo",
+            authDomain: "sistema-drives.firebaseapp.com",
+            databaseURL: "https://sistema-drives-default-rtdb.firebaseio.com",
+            projectId: "sistema-drives",
+            storageBucket: "sistema-drives.firebasestorage.app",
+            messagingSenderId: "90142488187",
+            appId: "1:90142488187:web:e78be9ed5943ee8e7a54de"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        const contadorFila = document.getElementById('contadorFila');
+        const dadosProximo = document.getElementById('dadosProximo');
+        const btnChamar = document.getElementById('btnChamar');
+        const bancadaInput = document.getElementById('bancadaInput');
+        
+        const painelAtual = document.getElementById('painelAtual');
+        const nomeAtualImpar = document.getElementById('nomeAtualImpar');
+        const gaiolaAtualImpar = document.getElementById('gaiolaAtualImpar');
+        const nomeAtualPar = document.getElementById('nomeAtualPar');
+        const gaiolaAtualPar = document.getElementById('gaiolaAtualPar');
+        const horaAtual = document.getElementById('horaAtual');
+
+        let totalGeralAguardando = 0;
+        let filaCompletaLocais = [];
+
+        // Trata a string para formatação elegante no envio ao Firebase
+        function formatarNomeBancada(valor) {
+            if (!valor) return "Bancada 01";
+            let valorLimpo = valor.trim();
+            if (/^\d+$/.test(valorLimpo)) {
+                let numero = parseInt(valorLimpo, 10);
+                let numeroPadrao = numero < 10 ? `0${numero}` : numero;
+                return `Bancada ${numeroPadrao}`;
+            }
+            return valorLimpo;
+        }
+
+        // Trata qualquer variação de escrita do motorista
+        function extrairDadosGaiola(gaiolaStr) {
+            if (!gaiolaStr) return null;
+            let limpo = gaiolaStr.trim().toUpperCase().replace(/\s+/g, '');
+            const match = limpo.match(/^([A-Z]+)-?(\d+)$/);
+            if (match) {
+                const letra = match[1];
+                const numero = parseInt(match[2], 10);
+                const numeroPadrao = numero < 10 ? `0${numero}` : numero;
+                return { 
+                    letra: letra, 
+                    numero: numero, 
+                    gaiolaTexto: `${letra}-${numeroPadrao}` 
+                };
+            }
+            return null;
+        }
+
+        // Calcula o número do parceiro
+        function obterParceiroGaiola(dadosGaiola) {
+            if (!dadosGaiola) return null;
+            const num = dadosGaiola.numero;
+            let numParceiro = num % 2 !== 0 ? num + 1 : num - 1;
+            const numFormatado = numParceiro < 10 ? `0${numParceiro}` : numParceiro;
+            return {
+                letra: dadosGaiola.letra,
+                numero: numParceiro,
+                gaiolaTexto: `${dadosGaiola.letra}-${numFormatado}`
+            };
+        }
+
+        database.ref('fila').orderByChild('timestamp').on('value', function(snapshot) {
+            let totalAguardando = 0;
+            filaCompletaLocais = [];
+            
+            snapshot.forEach(function(childSnapshot) {
+                const dados = childSnapshot.val();
+                dados.id = childSnapshot.key;
+                filaCompletaLocais.push(dados);
+                if (dados.status === "aguardando") {
+                    totalAguardando++;
+                }
+            });
+
+            totalGeralAguardando = totalAguardando;
+            contadorFila.innerText = totalAguardando;
+
+            const proximoPrincipal = filaCompletaLocais.find(d => d.status === "aguardando");
+            if (proximoPrincipal) {
+                const infoGaiola = extrairDadosGaiola(proximoPrincipal.gaiola);
+                const parceiroInfo = obterParceiroGaiola(infoGaiola);
+
+                const parceiroFila = filaCompletaLocais.find(d => {
+                    if (d.status !== "aguardando") return false;
+                    const infoD = extrairDadosGaiola(d.gaiola);
+                    return infoD && infoD.gaiolaTexto === parceiroInfo?.gaiolaTexto;
+                });
+
+                const principalEhImpar = infoGaiola && infoGaiola.numero % 2 !== 0;
+                
+                let linhaImparHTML = "";
+                let linhaParHTML = "";
+
+                if (principalEhImpar) {
+                    linhaImparHTML = `<strong>Gaiola ${infoGaiola.gaiolaTexto}:</strong> <span class="txt-presente">${proximoPrincipal.nome}</span>`;
+                    if (parceiroFila) {
+                        linhaParHTML = `<strong>Gaiola ${parceiroInfo.gaiolaTexto}:</strong> <span class="txt-presente">${parceiroFila.nome}</span>`;
+                    } else {
+                        linhaParHTML = `<strong>Gaiola ${parceiroInfo ? parceiroInfo.gaiolaTexto : '-'}:</strong> <span class="txt-ausente">AGUARDANDO...</span>`;
+                    }
+                } else {
+                    linhaParHTML = `<strong>Gaiola ${infoGaiola.gaiolaTexto}:</strong> <span class="txt-presente">${proximoPrincipal.nome}</span>`;
+                    if (parceiroFila) {
+                        linhaImparHTML = `<strong>Gaiola ${parceiroInfo.gaiolaTexto}:</strong> <span class="txt-presente">${parceiroFila.nome}</span>`;
+                    } else {
+                        linhaImparHTML = `<strong>Gaiola ${parceiroInfo ? parceiroInfo.gaiolaTexto : '-'}:</strong> <span class="txt-ausente">AGUARDANDO...</span>`;
+                    }
+                }
+
+                dadosProximo.innerHTML = `${linhaImparHTML}<br>${linhaParHTML}`;
+                btnChamar.disabled = false;
+                btnChamar.innerText = "Chamar Dupla";
+            } else {
+                dadosProximo.innerHTML = "Ninguém na fila";
+                btnChamar.disabled = true;
+                btnChamar.innerText = "Fila Vazia";
+            }
+        });
+
+        bancadaInput.addEventListener('input', function() {
+            bancadaInput.classList.remove('erro-campo');
+        });
+
+        function executarChamada() {
+            let bancadaDigitada = bancadaInput.value.trim();
+            const bancadaSalva = localStorage.getItem('ultimaBancada');
+
+            if (bancadaDigitada === "") {
+                if (bancadaSalva) {
+                    bancadaDigitada = bancadaSalva;
+                } else {
+                    bancadaInput.classList.add('erro-campo');
+                    bancadaInput.focus();
+                    alert("ERRO: Por favor, identifique a sua bancada antes de realizar uma chamada!");
+                    return;
+                }
+            } else {
+                // Guarda de fundo apenas para permitir o clique rápido sem redigitar
+                localStorage.setItem('ultimaBancada', bancadaDigitada);
+            }
+
+            if (totalGeralAguardando === 0) return; 
+
+            const agora = new Date();
+            const horaFormatada = agora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+            const principal = filaCompletaLocais.find(d => d.status === "aguardando");
+            if (!principal) return;
+
+            const infoGaiola = extrairDadosGaiola(principal.gaiola);
+            const parceiroInfo = obterParceiroGaiola(infoGaiola);
+
+            const parceiro = filaCompletaLocais.find(d => {
+                if (d.status !== "aguardando") return false;
+                const infoD = extrairDadosGaiola(d.gaiola);
+                return infoD && infoD.gaiolaTexto === parceiroInfo?.gaiolaTexto;
+            });
+
+            // Formata o nome para gravação
+            const bancadaParaEnviar = formatarNomeBancada(bancadaDigitada);
+
+            // Grava o chamado do principal
+            database.ref('fila/' + principal.id).update({
+                status: "chamado",
+                bancada: bancadaParaEnviar,
+                horaChamado: horaFormatada,
+                parceiroId: parceiro ? parceiro.id : "retardatario",
+                parceiroNome: parceiro ? parceiro.nome : "AGUARDANDO...",
+                parceiroGaiola: parceiroInfo ? parceiroInfo.gaiolaTexto : ""
+            });
+
+            // Se o parceiro também estiver, altera simultaneamente
+            if (parceiro) {
+                database.ref('fila/' + parceiro.id).update({
+                    status: "chamado",
+                    bancada: bancadaParaEnviar,
+                    horaChamado: horaFormatada,
+                    parceiroId: principal.id,
+                    parceiroNome: principal.nome,
+                    parceiroGaiola: infoGaiola.gaiolaTexto
+                });
+            }
+
+            const principalEhImpar = infoGaiola && infoGaiola.numero % 2 !== 0;
+            
+            if (principalEhImpar) {
+                nomeAtualImpar.innerText = principal.nome;
+                gaiolaAtualImpar.innerText = infoGaiola.gaiolaTexto;
+                nomeAtualPar.innerText = parceiro ? parceiro.nome : "AGUARDANDO...";
+                gaiolaAtualPar.innerText = parceiroInfo ? parceiroInfo.gaiolaTexto : "-";
+            } else {
+                nomeAtualPar.innerText = principal.nome;
+                gaiolaAtualPar.innerText = infoGaiola.gaiolaTexto;
+                nomeAtualImpar.innerText = parceiro ? parceiro.nome : "AGUARDANDO...";
+                gaiolaAtualImpar.innerText = parceiroInfo ? parceiroInfo.gaiolaTexto : "-";
+            }
+            
+            nomeAtualImpar.className = nomeAtualImpar.innerText === "AGUARDANDO..." ? "txt-ausente" : "txt-presente";
+            nomeAtualPar.className = nomeAtualPar.innerText === "AGUARDANDO..." ? "txt-ausente" : "txt-presente";
+
+            horaAtual.innerText = horaFormatada;
+            painelAtual.style.display = "block";
+
+            // Limpa o input e o cursor volta a piscar. O placeholder visual continuará fixo como "Ex: Bancada 01"
+            bancadaInput.value = "";
+            bancadaInput.focus();
+        }
+
+        btnChamar.addEventListener('click', executarChamada);
+
+        window.addEventListener('keydown', function(evento) {
+            if (evento.key === 'Enter') {
+                executarChamada();
+            }
+        });
+    </script>
+</body>
+</html>
