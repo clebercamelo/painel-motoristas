@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Painel de Chamadas - Acompanhamento Duplo</title>
     <style>
         * {
@@ -24,7 +24,7 @@
 
         .container {
             width: 100%;
-            max-width: 950px; /* Reduzido de 1200px para compactar o visual na TV */
+            max-width: 950px;
             margin: 0 auto;
         }
 
@@ -38,7 +38,7 @@
 
         header h1 {
             color: #ff6b00;
-            font-size: 34px; /* Ajustado levemente para equilíbrio */
+            font-size: 34px;
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -52,7 +52,6 @@
             font-weight: 500;
         }
 
-        /* CARD DESTAQUE PRINCIPAL */
         .chamado-principal {
             background: linear-gradient(135deg, #151922 0%, #0f1319 100%);
             border: 3px solid #ff6b00;
@@ -65,14 +64,8 @@
         }
 
         @keyframes pulsar-borda {
-            from {
-                border-color: #ff6b00;
-                box-shadow: 0 0 25px rgba(255, 107, 0, 0.15);
-            }
-            to {
-                border-color: #ff9e59;
-                box-shadow: 0 0 45px rgba(255, 107, 0, 0.35);
-            }
+            from { border-color: #ff6b00; box-shadow: 0 0 25px rgba(255, 107, 0, 0.15); }
+            to { border-color: #ff9e59; box-shadow: 0 0 45px rgba(255, 107, 0, 0.35); }
         }
 
         .chamado-principal h2 {
@@ -110,7 +103,6 @@
             border: 1px solid #2e3748;
             border-left: 8px solid #10b981; 
             text-align: left;
-            transition: all 0.3s ease;
         }
 
         .motorista-destaque-box.retardatario {
@@ -120,7 +112,7 @@
         }
 
         .nome-grande {
-            font-size: 28px; /* Calibrado para evitar quebras abruptas */
+            font-size: 28px;
             font-weight: 900;
             color: #10b981; 
             margin-bottom: 12px;
@@ -167,14 +159,12 @@
             font-weight: 700;
         }
 
-        /* CONTAINER VAZIO */
         .chamado-principal.vazio {
             animation: none;
             border-color: #2e3748;
             box-shadow: none;
         }
 
-        /* HISTÓRICO */
         .historico-section {
             background-color: #11151d;
             border: 1px solid #1e293b;
@@ -202,28 +192,11 @@
             align-items: center;
         }
 
-        .chamada-item:last-child {
-            border-bottom: none;
-        }
-
-        .motorista-col {
-            font-weight: 800;
-            color: #10b981; 
-            font-size: 17px;
-        }
-
-        .motorista-col.ausente {
-            color: #ef4444; 
-            font-style: italic;
-        }
-
-        .gaiola-col {
-            font-size: 14px;
-            color: #94a3b8;
-            font-weight: 600;
-            margin-top: 2px;
-        }
-
+        .chamada-item:last-child { border-bottom: none; }
+        .motorista-col { font-weight: 800; color: #10b981; font-size: 17px; }
+        .motorista-col.ausente { color: #ef4444; font-style: italic; }
+        .gaiola-col { font-size: 14px; color: #94a3b8; font-weight: 600; margin-top: 2px; }
+        
         .bancada-badge {
             background-color: #ff6b00;
             padding: 5px 12px;
@@ -231,25 +204,18 @@
             font-weight: 800;
             color: #0d0f12;
             font-size: 14px;
-            box-shadow: 0 0 10px rgba(255, 107, 0, 0.2);
             text-transform: uppercase;
         }
 
-        .sem-chamadas {
-            text-align: center;
-            color: #64748b;
-            padding: 30px 0;
-            font-size: 16px;
-        }
+        .sem-chamadas { text-align: center; color: #64748b; padding: 30px 0; font-size: 16px; }
 
-        /* INTERRUPTOR DE AUDIO (MODAL FLUTUANTE) */
         #audioPermissao {
             position: fixed;
             top: 15px;
             right: 15px;
             background: #ff6b00;
             color: #0d0f12;
-            padding: 10px 18px;
+            padding: 12px 24px;
             border-radius: 30px;
             font-weight: 800;
             cursor: pointer;
@@ -257,38 +223,85 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 4px 20px rgba(255, 107, 0, 0.4);
             border: none;
-            font-size: 13px;
-            transition: all 0.2s ease;
+            font-size: 14px;
         }
 
-        #audioPermissao:hover {
-            transform: scale(1.05);
-            background: #ff852e;
-        }
+        #audioPermissao.ativo { background: #1e293b; color: #94a3b8; box-shadow: none; }
 
-        #audioPermissao.ativo {
-            background: #1e293b;
-            color: #94a3b8;
-            box-shadow: none;
-        }
-
-        /* Ajustes responsivos para Mobile */
+        /* ======================================================= */
+        /* CORREÇÃO VOLTADA PARA TELAS MENORES (CELULAR)           */
+        /* ======================================================= */
         @media (max-width: 600px) {
-            header h1 { font-size: 26px; }
-            .nome-grande { font-size: 22px; min-height: auto; }
-            .bancada-destacada { font-size: 28px; }
-            .chamada-item { flex-direction: column; align-items: flex-start; gap: 10px; }
-            .chamada-item > div:last-child { text-align: left !important; }
+            body { padding: 10px; }
+            header h1 { font-size: 22px !important; }
+            header p { font-size: 13px !important; }
+            
+            #audioPermissao {
+                position: static !important;
+                width: 100% !important;
+                margin-bottom: 15px !important;
+                border-radius: 12px !important;
+                justify-content: center !important;
+                padding: 10px !important;
+                font-size: 13px !important;
+            }
+
+            /* Container Compacto */
+            .chamado-principal {
+                padding: 12px !important;
+                margin-bottom: 12px !important;
+                border-radius: 12px !important;
+            }
+
+            .chamado-principal h2 { font-size: 14px !important; margin-bottom: 12px !important; }
+            .bancada-destacada { font-size: 22px !important; }
+
+            /* Alinhamento Forçado Vertical */
+            .destaque-dupla-flex {
+                flex-direction: column !important;
+                gap: 10px !important;
+            }
+
+            .motorista-destaque-box {
+                min-width: 100% !important;
+                width: 100% !important;
+                padding: 12px !important;
+                border-radius: 10px !important;
+                text-align: center !important; /* Centraliza todo o conteúdo */
+                border-left: none !important;
+                border-top: 5px solid #10b981 !important; /* Barra de cor no topo */
+            }
+
+            .motorista-destaque-box.retardatario { border-top-color: #ef4444 !important; }
+
+            /* Nome centralizado e tamanho responsivo */
+            .nome-grande { 
+                font-size: 20px !important; 
+                min-height: auto !important; 
+                justify-content: center !important; 
+                text-align: center !important;
+                margin-bottom: 6px !important;
+                display: block !important;
+                width: 100% !important;
+            }
+
+            .gaiola-badge { font-size: 13px !important; padding: 4px 8px !important; display: inline-block !important; }
+            .meta-chamado { font-size: 12px !important; padding-top: 8px !important; margin-top: 8px !important; }
+
+            /* Histórico Redimensionado */
+            .chamada-item { flex-direction: column !important; align-items: stretch !important; gap: 10px !important; padding: 10px 0 !important; }
+            .chamada-item > div:first-child { width: 100% !important; gap: 10px !important; display: flex !important; }
+            .motorista-col { font-size: 14px !important; }
+            .gaiola-col { font-size: 12px !important; }
+            .chamada-item > div:last-child { display: flex !important; justify-content: space-between !important; align-items: center !important; border-top: 1px dashed #1e293b !important; padding-top: 6px !important; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Botão de Ativação do Áudio -->
     <button id="audioPermissao" onclick="ativarAudio()">
-        🔊 ATIVAR SOM DO PAINEL
+        🔔 ATIVAR ÁUDIO E SOM DO PAINEL
     </button>
 
     <div class="container">
@@ -304,14 +317,14 @@
             <div class="destaque-dupla-flex">
                 <div class="motorista-destaque-box" id="boxImpar">
                     <div class="nome-grande" id="nomeImpar">-</div>
-                    <div>
+                    <div style="text-align: center; width: 100%;">
                         <span class="gaiola-badge" id="gaiolaImpar">-</span>
                     </div>
                 </div>
 
                 <div class="motorista-destaque-box" id="boxPar">
                     <div class="nome-grande" id="nomePar">-</div>
-                    <div>
+                    <div style="text-align: center; width: 100%;">
                         <span class="gaiola-badge" id="gaiolaPar">-</span>
                     </div>
                 </div>
@@ -324,8 +337,8 @@
 
         <!-- Mensagem de Espera -->
         <div class="chamado-principal vazio" id="containerVazio">
-            <h2 style="color: #ff6b00; margin-bottom: 10px;">Aguardando chamada inicial...</h2>
-            <p style="color: #94a3b8;">As próximas duplas de motoristas aparecerão aqui.</p>
+            <h2 style="color: #ff6b00; margin-bottom: 10px; font-size: 18px;">Aguardando chamada inicial...</h2>
+            <p style="color: #94a3b8; font-size: 14px;">As próximas duplas aparecerão aqui.</p>
         </div>
 
         <!-- Histórico -->
@@ -341,7 +354,6 @@
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
     <script>
-        // Configurações do Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyCndSz1N8C_i94VbQsVLu9VUIEI1du-KAo",
             authDomain: "sistema-drives.firebaseapp.com",
@@ -355,7 +367,6 @@
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
 
-        // Elementos de DOM
         const containerDestaque = document.getElementById('containerDestaque');
         const containerVazio = document.getElementById('containerVazio');
         const nomeImpar = document.getElementById('nomeImpar');
@@ -371,57 +382,69 @@
 
         let ultimoIdChamado = null;
         let audioAtivo = false;
-        let audioCtx = null;
+        let audioContext = null;
 
         function ativarAudio() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
             audioAtivo = true;
-            btnAudio.innerText = "🔊 SOM ATIVADO";
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            btnAudio.innerText = "🔔 SOM E VOZ ATIVADOS";
             btnAudio.classList.add('ativo');
-            
-            tocarAlertaNativo();
-            
-            setTimeout(() => {
-                btnAudio.style.display = 'none';
-            }, 2500);
+            tocarSininho();
+            setTimeout(() => { falarTexto("Áudio ativado."); }, 600);
+            setTimeout(() => { btnAudio.style.display = 'none'; }, 2000);
         }
 
-        function tocarAlertaNativo() {
-            if (!audioAtivo || !audioCtx) return;
-
+        function tocarSininho() {
+            if (!audioAtivo || !audioContext) return;
             try {
-                let osc1 = audioCtx.createOscillator();
-                let gain1 = audioCtx.createGain();
+                let osc1 = audioContext.createOscillator();
+                let gain1 = audioContext.createGain();
                 osc1.type = 'sine';
-                osc1.frequency.setValueAtTime(587.33, audioCtx.currentTime); 
-                gain1.gain.setValueAtTime(0.15, audioCtx.currentTime);
-                gain1.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
-                osc1.connect(gain1);
-                gain1.connect(audioCtx.destination);
-                osc1.start();
-                osc1.stop(audioCtx.currentTime + 0.4);
+                osc1.frequency.setValueAtTime(587.33, audioContext.currentTime); 
+                gain1.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gain1.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.4);
+                osc1.connect(gain1); gain1.connect(audioContext.destination);
+                osc1.start(); osc1.stop(audioContext.currentTime + 0.4);
 
                 setTimeout(() => {
-                    let osc2 = audioCtx.createOscillator();
-                    let gain2 = audioCtx.createGain();
+                    let osc2 = audioContext.createOscillator();
+                    let gain2 = audioContext.createGain();
                     osc2.type = 'sine';
-                    osc2.frequency.setValueAtTime(880, audioCtx.currentTime); 
-                    gain2.gain.setValueAtTime(0.15, audioCtx.currentTime);
-                    gain2.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.6);
-                    osc2.connect(gain2);
-                    gain2.connect(audioCtx.destination);
-                    osc2.start();
-                    osc2.stop(audioCtx.currentTime + 0.6);
-                }, 180);
+                    osc2.frequency.setValueAtTime(880.00, audioContext.currentTime); 
+                    gain2.gain.setValueAtTime(0.3, audioContext.currentTime);
+                    gain2.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                    osc2.connect(gain2); gain2.connect(audioContext.destination);
+                    osc2.start(); osc2.stop(audioContext.currentTime + 0.5);
+                }, 150);
+            } catch (e) { console.log(e); }
+        }
 
-            } catch (e) {
-                console.log("Falha ao emitir áudio nativo:", e);
-            }
+        function falarTexto(texto) {
+            if (!audioAtivo) return;
+            window.speechSynthesis.cancel(); 
+            const mensagemVoz = new SpeechSynthesisUtterance(texto);
+            mensagemVoz.lang = 'pt-BR';
+            mensagemVoz.rate = 0.95; 
+            window.speechSynthesis.speak(mensagemVoz);
+        }
+
+        function ejecutarChamadaCompleta(dadosDupla) {
+            tocarSininho();
+            setTimeout(() => {
+                let frase = "";
+                const temImpar = dadosDupla.nomeImpar && dadosDupla.nomeImpar !== "AGUARDANDO...";
+                const temPar = dadosDupla.nomePar && dadosDupla.nomePar !== "AGUARDANDO...";
+                if (temImpar && temPar) {
+                    frase = `Atenção motoristas, ${dadosDupla.nomeImpar} e ${dadosDupla.nomePar}. Comparecer à bancada número ${dadosDupla.bancada}.`;
+                } else if (temImpar) {
+                    frase = `Atenção motorista, ${dadosDupla.nomeImpar}. Comparecer à bancada número ${dadosDupla.bancada}.`;
+                } else if (temPar) {
+                    frase = `Atenção motorista, ${dadosDupla.nomePar}. Comparecer à bancada número ${dadosDupla.bancada}.`;
+                } else { return; }
+                falarTexto(frase);
+            }, 800);
         }
 
         function extrairDadosGaiola(gaiolaStr) {
@@ -439,7 +462,6 @@
 
         database.ref('fila').on('value', function(snapshot) {
             let todosRegistros = [];
-
             snapshot.forEach(function(childSnapshot) {
                 const dados = childSnapshot.val();
                 if (dados.status === "chamado") {
@@ -468,7 +490,6 @@
 
             todosRegistros.forEach(registro => {
                 if (processadosIds.has(registro.id)) return;
-
                 const infoG = extrairDadosGaiola(registro.gaiola);
                 if (!infoG) return;
 
@@ -479,98 +500,64 @@
                 let parceiroMatch = todosRegistros.find(r => {
                     if (r.id === registro.id || processadosIds.has(r.id)) return false;
                     const infoR = extrairDadosGaiola(r.gaiola);
-                    return infoR && 
-                           infoR.gaiolaTexto === textoParceiroAlvo && 
-                           r.bancada === registro.bancada && 
-                           r.horaChamado === registro.horaChamado;
+                    return infoR && infoR.gaiolaTexto === textoParceiroAlvo && r.bancada === registro.bancada && r.horaChamado === registro.horaChamado;
                 });
 
-                let itemDupla = {
-                    bancada: registro.bancada,
-                    horaChamado: registro.horaChamado,
-                    timestamp: registro.timestamp,
-                    idPrincipal: registro.id
-                };
-
-                const principalEhImpar = infoG.numero % 2 !== 0;
-
-                if (principalEhImpar) {
-                    itemDupla.nomeImpar = registro.name;
-                    itemDupla.gaiolaImpar = infoG.gaiolaTexto;
-                    itemDupla.nomePar = parceiroMatch ? parceiroMatch.name : "AGUARDANDO...";
-                    itemDupla.gaiolaPar = textoParceiroAlvo;
+                let itemDupla = { bancada: registro.bancada, horaChamado: registro.horaChamado, timestamp: registro.timestamp, idPrincipal: registro.id };
+                if (infoG.numero % 2 !== 0) {
+                    itemDupla.nomeImpar = registro.name; itemDupla.gaiolaImpar = infoG.gaiolaTexto;
+                    itemDupla.nomePar = parceiroMatch ? parceiroMatch.name : "AGUARDANDO..."; itemDupla.gaiolaPar = textoParceiroAlvo;
                 } else {
-                    itemDupla.nomePar = registro.name;
-                    itemDupla.gaiolaPar = infoG.gaiolaTexto;
-                    itemDupla.nomeImpar = parceiroMatch ? parceiroMatch.name : "AGUARDANDO...";
-                    itemDupla.gaiolaImpar = textoParceiroAlvo;
+                    itemDupla.nomePar = registro.name; itemDupla.gaiolaPar = infoG.gaiolaTexto;
+                    itemDupla.nomeImpar = parceiroMatch ? parceiroMatch.name : "AGUARDANDO..."; itemDupla.gaiolaImpar = textoParceiroAlvo;
                 }
-
                 duplasAgrupadas.push(itemDupla);
-                
                 processadosIds.add(registro.id);
-                if (parceiroMatch) {
-                    processadosIds.add(parceiroMatch.id);
-                }
+                if (parceiroMatch) processadosIds.add(parceiroMatch.id);
             });
 
             const atual = duplasAgrupadas[0];
-
             nomeImpar.innerText = atual.nomeImpar;
             gaiolaImpar.innerText = `Gaiola ${atual.gaiolaImpar}`;
-            if (atual.nomeImpar === "AGUARDANDO...") {
-                boxImpar.classList.add('retardatario');
-            } else {
-                boxImpar.classList.remove('retardatario');
-            }
+            if (atual.nomeImpar === "AGUARDANDO...") boxImpar.classList.add('retardatario'); else boxImpar.classList.remove('retardatario');
 
             nomePar.innerText = atual.nomePar;
             gaiolaPar.innerText = `Gaiola ${atual.gaiolaPar}`;
-            if (atual.nomePar === "AGUARDANDO...") {
-                boxPar.classList.add('retardatario');
-            } else {
-                boxPar.classList.remove('retardatario');
-            }
+            if (atual.nomePar === "AGUARDANDO...") boxPar.classList.add('retardatario'); else boxPar.classList.remove('retardatario');
 
             destaqueBancada.innerText = atual.bancada;
             destaqueHora.innerText = atual.horaChamado;
-
             containerVazio.style.display = "none";
             containerDestaque.style.display = "block";
 
-            if (ultimoIdChamado && ultimoIdChamado !== atual.idPrincipal) {
-                tocarAlertaNativo();
-            }
+            if (ultimoIdChamado && ultimoIdChamado !== atual.idPrincipal) { ejecutarChamadaCompleta(atual); }
             ultimoIdChamado = atual.idPrincipal;
 
             let historicoHTML = "";
             const listaHistoricoItens = duplasAgrupadas.slice(1);
-
             if (listaHistoricoItens.length > 0) {
                 listaHistoricoItens.forEach(function(item) {
                     historicoHTML += `
                         <div class="chamada-item">
-                            <div style="display: flex; gap: 30px; width: 80%; flex-wrap: wrap;">
-                                <div style="flex: 1; min-width: 150px;">
+                            <div style="display: flex; gap: 10px; width: 100%; justify-content: space-between;">
+                                <div style="flex: 1;">
                                     <div class="motorista-col ${item.nomeImpar === 'AGUARDANDO...' ? 'ausente' : ''}">${item.nomeImpar}</div>
                                     <div class="gaiola-col">Gaiola: ${item.gaiolaImpar}</div>
                                 </div>
-                                <div style="flex: 1; min-width: 150px; border-left: 1px solid #1e293b; padding-left: 20px;">
+                                <div style="flex: 1; text-align: right;">
                                     <div class="motorista-col ${item.nomePar === 'AGUARDANDO...' ? 'ausente' : ''}">${item.nomePar}</div>
                                     <div class="gaiola-col">Gaiola: ${item.gaiolaPar}</div>
                                 </div>
                             </div>
-                            <div style="text-align: right; min-width: 80px;">
-                                <div style="font-size: 14px; color: #64748b; margin-bottom: 5px;">${item.horaChamado}</div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; border-top: 1px dashed #1e293b; margin-top: 5px; padding-top: 5px;">
+                                <span style="font-size: 12px; color: #64748b;">${item.horaChamado}</span>
                                 <span class="bancada-badge">${item.bancada}</span>
                             </div>
                         </div>
                     `;
                 });
                 listaHistorico.innerHTML = historicoHTML;
-            } else {
-                listaHistorico.innerHTML = '<div class="sem-chamadas">Nenhuma chamada anterior na lista.</div>';
-            }
+            } else { listaHistorico.innerHTML = '<div class="sem-chamadas">Nenhuma chamada anterior na lista.</div>'; }
         });
     </script>
 </body>
