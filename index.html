@@ -15,7 +15,7 @@
         body {
             background-color: #0d0f12;
             color: #e2e8f0;
-            padding: 25px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -24,12 +24,13 @@
 
         .container {
             width: 100%;
-            max-width: 1200px;
+            max-width: 950px; /* Reduzido de 1200px para compactar o visual na TV */
+            margin: 0 auto;
         }
 
         header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             border-bottom: 1px solid #1e293b;
             padding-bottom: 15px;
             position: relative;
@@ -37,7 +38,7 @@
 
         header h1 {
             color: #ff6b00;
-            font-size: 38px;
+            font-size: 34px; /* Ajustado levemente para equilíbrio */
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -46,8 +47,8 @@
 
         header p {
             color: #94a3b8;
-            margin-top: 8px;
-            font-size: 18px;
+            margin-top: 6px;
+            font-size: 16px;
             font-weight: 500;
         }
 
@@ -56,10 +57,10 @@
             background: linear-gradient(135deg, #151922 0%, #0f1319 100%);
             border: 3px solid #ff6b00;
             border-radius: 20px;
-            padding: 35px;
+            padding: 30px;
             text-align: center;
             box-shadow: 0 0 35px rgba(255, 107, 0, 0.2);
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             animation: pulsar-borda 2s infinite alternate;
         }
 
@@ -76,16 +77,16 @@
 
         .chamado-principal h2 {
             color: #94a3b8;
-            font-size: 20px;
+            font-size: 18px;
             text-transform: uppercase;
             letter-spacing: 3px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             font-weight: 700;
         }
 
         .bancada-destacada {
             color: #ff6b00;
-            font-size: 42px;
+            font-size: 36px;
             font-weight: 900;
             text-shadow: 0 0 15px rgba(255, 107, 0, 0.4);
             display: inline-block;
@@ -94,17 +95,17 @@
 
         .destaque-dupla-flex {
             display: flex;
-            gap: 25px;
+            gap: 20px;
             justify-content: space-between;
             flex-wrap: wrap;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .motorista-destaque-box {
             flex: 1;
-            min-width: 280px;
+            min-width: 260px;
             background: #1e2530;
-            padding: 25px;
+            padding: 20px;
             border-radius: 16px;
             border: 1px solid #2e3748;
             border-left: 8px solid #10b981; 
@@ -119,12 +120,12 @@
         }
 
         .nome-grande {
-            font-size: 32px;
+            font-size: 28px; /* Calibrado para evitar quebras abruptas */
             font-weight: 900;
             color: #10b981; 
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             word-wrap: break-word;
-            min-height: 80px;
+            min-height: 70px;
             display: flex;
             align-items: center;
             text-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
@@ -140,10 +141,10 @@
             display: inline-block;
             background-color: rgba(16, 185, 129, 0.15);
             color: #10b981;
-            padding: 8px 16px;
+            padding: 6px 14px;
             border-radius: 8px;
             font-weight: 800;
-            font-size: 18px;
+            font-size: 16px;
             border: 1px solid rgba(16, 185, 129, 0.3);
             letter-spacing: 1px;
         }
@@ -155,14 +156,14 @@
         }
 
         .meta-chamado {
-            margin-top: 20px;
+            margin-top: 15px;
             display: flex;
             justify-content: center;
             gap: 20px;
-            font-size: 18px;
+            font-size: 16px;
             color: #ff6b00;
             border-top: 1px solid #1e293b;
-            padding-top: 15px;
+            padding-top: 12px;
             font-weight: 700;
         }
 
@@ -178,24 +179,24 @@
             background-color: #11151d;
             border: 1px solid #1e293b;
             border-radius: 16px;
-            padding: 25px;
+            padding: 20px;
         }
 
         .historico-section h3 {
-            font-size: 20px;
+            font-size: 18px;
             color: #94a3b8;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             border-bottom: 2px solid #1e293b;
-            padding-bottom: 12px;
+            padding-bottom: 10px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
         .chamada-item {
-            padding: 16px;
+            padding: 14px;
             border-bottom: 1px solid #1e293b;
-            font-size: 18px;
+            font-size: 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -208,7 +209,7 @@
         .motorista-col {
             font-weight: 800;
             color: #10b981; 
-            font-size: 19px;
+            font-size: 17px;
         }
 
         .motorista-col.ausente {
@@ -217,19 +218,19 @@
         }
 
         .gaiola-col {
-            font-size: 15px;
+            font-size: 14px;
             color: #94a3b8;
             font-weight: 600;
-            margin-top: 3px;
+            margin-top: 2px;
         }
 
         .bancada-badge {
             background-color: #ff6b00;
-            padding: 6px 14px;
+            padding: 5px 12px;
             border-radius: 30px;
             font-weight: 800;
             color: #0d0f12;
-            font-size: 15px;
+            font-size: 14px;
             box-shadow: 0 0 10px rgba(255, 107, 0, 0.2);
             text-transform: uppercase;
         }
@@ -237,28 +238,28 @@
         .sem-chamadas {
             text-align: center;
             color: #64748b;
-            padding: 40px 0;
-            font-size: 18px;
+            padding: 30px 0;
+            font-size: 16px;
         }
 
         /* INTERRUPTOR DE AUDIO (MODAL FLUTUANTE) */
         #audioPermissao {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 15px;
+            right: 15px;
             background: #ff6b00;
             color: #0d0f12;
-            padding: 12px 20px;
+            padding: 10px 18px;
             border-radius: 30px;
             font-weight: 800;
             cursor: pointer;
             z-index: 1000;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             box-shadow: 0 4px 20px rgba(255, 107, 0, 0.4);
             border: none;
-            font-size: 14px;
+            font-size: 13px;
             transition: all 0.2s ease;
         }
 
@@ -271,6 +272,15 @@
             background: #1e293b;
             color: #94a3b8;
             box-shadow: none;
+        }
+
+        /* Ajustes responsivos para Mobile */
+        @media (max-width: 600px) {
+            header h1 { font-size: 26px; }
+            .nome-grande { font-size: 22px; min-height: auto; }
+            .bancada-destacada { font-size: 28px; }
+            .chamada-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .chamada-item > div:last-child { text-align: left !important; }
         }
     </style>
 </head>
@@ -363,7 +373,6 @@
         let audioAtivo = false;
         let audioCtx = null;
 
-        // Função para ativar o áudio nativo na primeira interação
         function ativarAudio() {
             if (!audioCtx) {
                 audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -375,25 +384,21 @@
             btnAudio.innerText = "🔊 SOM ATIVADO";
             btnAudio.classList.add('ativo');
             
-            // Toca um bipe rápido para confirmar ativação
             tocarAlertaNativo();
             
-            // Esconde o botão após alguns segundos para limpar o painel
             setTimeout(() => {
                 btnAudio.style.display = 'none';
             }, 2500);
         }
 
-        // Sintetizador nativo para o Alerta de Chamada (Garante reprodução sem depender de arquivo externo)
         function tocarAlertaNativo() {
             if (!audioAtivo || !audioCtx) return;
 
             try {
-                // Bipe 1
                 let osc1 = audioCtx.createOscillator();
                 let gain1 = audioCtx.createGain();
                 osc1.type = 'sine';
-                osc1.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5 (Nota D)
+                osc1.frequency.setValueAtTime(587.33, audioCtx.currentTime); 
                 gain1.gain.setValueAtTime(0.15, audioCtx.currentTime);
                 gain1.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
                 osc1.connect(gain1);
@@ -401,12 +406,11 @@
                 osc1.start();
                 osc1.stop(audioCtx.currentTime + 0.4);
 
-                // Bipe 2 (Atrasado)
                 setTimeout(() => {
                     let osc2 = audioCtx.createOscillator();
                     let gain2 = audioCtx.createGain();
                     osc2.type = 'sine';
-                    osc2.frequency.setValueAtTime(880, audioCtx.currentTime); // A5 (Nota Lá mais aguda)
+                    osc2.frequency.setValueAtTime(880, audioCtx.currentTime); 
                     gain2.gain.setValueAtTime(0.15, audioCtx.currentTime);
                     gain2.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.6);
                     osc2.connect(gain2);
@@ -441,7 +445,7 @@
                 if (dados.status === "chamado") {
                     todosRegistros.push({
                         id: childSnapshot.key,
-                        nome: dados.nome,
+                        name: dados.nome,
                         gaiola: dados.gaiola,
                         bancada: dados.bancada,
                         horaChamado: dados.horaChamado || "--:--",
@@ -491,14 +495,14 @@
                 const principalEhImpar = infoG.numero % 2 !== 0;
 
                 if (principalEhImpar) {
-                    itemDupla.nomeImpar = registro.nome;
+                    itemDupla.nomeImpar = registro.name;
                     itemDupla.gaiolaImpar = infoG.gaiolaTexto;
-                    itemDupla.nomePar = parceiroMatch ? parceiroMatch.nome : "AGUARDANDO...";
+                    itemDupla.nomePar = parceiroMatch ? parceiroMatch.name : "AGUARDANDO...";
                     itemDupla.gaiolaPar = textoParceiroAlvo;
                 } else {
-                    itemDupla.nomePar = registro.nome;
+                    itemDupla.nomePar = registro.name;
                     itemDupla.gaiolaPar = infoG.gaiolaTexto;
-                    itemDupla.nomeImpar = parceiroMatch ? parceiroMatch.nome : "AGUARDANDO...";
+                    itemDupla.nomeImpar = parceiroMatch ? parceiroMatch.name : "AGUARDANDO...";
                     itemDupla.gaiolaImpar = textoParceiroAlvo;
                 }
 
@@ -534,7 +538,6 @@
             containerVazio.style.display = "none";
             containerDestaque.style.display = "block";
 
-            // Executa o som de notificação inteligente se o ID mudou
             if (ultimoIdChamado && ultimoIdChamado !== atual.idPrincipal) {
                 tocarAlertaNativo();
             }
@@ -547,17 +550,17 @@
                 listaHistoricoItens.forEach(function(item) {
                     historicoHTML += `
                         <div class="chamada-item">
-                            <div style="display: flex; gap: 30px; width: 80%;">
-                                <div style="flex: 1;">
+                            <div style="display: flex; gap: 30px; width: 80%; flex-wrap: wrap;">
+                                <div style="flex: 1; min-width: 150px;">
                                     <div class="motorista-col ${item.nomeImpar === 'AGUARDANDO...' ? 'ausente' : ''}">${item.nomeImpar}</div>
                                     <div class="gaiola-col">Gaiola: ${item.gaiolaImpar}</div>
                                 </div>
-                                <div style="flex: 1; border-left: 1px solid #1e293b; padding-left: 20px;">
+                                <div style="flex: 1; min-width: 150px; border-left: 1px solid #1e293b; padding-left: 20px;">
                                     <div class="motorista-col ${item.nomePar === 'AGUARDANDO...' ? 'ausente' : ''}">${item.nomePar}</div>
                                     <div class="gaiola-col">Gaiola: ${item.gaiolaPar}</div>
                                 </div>
                             </div>
-                            <div style="text-align: right;">
+                            <div style="text-align: right; min-width: 80px;">
                                 <div style="font-size: 14px; color: #64748b; margin-bottom: 5px;">${item.horaChamado}</div>
                                 <span class="bancada-badge">${item.bancada}</span>
                             </div>
